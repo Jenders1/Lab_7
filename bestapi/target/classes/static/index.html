@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Things and stuff</title>
+    <link rel="stylesheet" href="./css/theStyle.css">
+</head>
+<body>
+
+
+<div id="container">
+    <div id="rcornerstop">
+        <h2>Things for sale</h2>
+        <div class="topnav">
+            <a href="index.html">Home</a>
+            <a href="cat.go">Catalog</a>
+            <a href="cart.go">Shopping Cart</a>
+        </div>
+        <br>
+    </div>
+    <span id="stuff"></span>
+
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var myObj = JSON.parse(this.responseText);
+                var content = "<table>";
+                for (var property in myObj) {
+                    if (myObj.hasOwnProperty(property)) {
+                        content += "<tr><td>" + myObj[property].name + "</td><td>" + myObj[property].thing + "</td></tr>";
+                }
+            }
+                content += "</table>"
+                document.getElementById("stuff").innerHTML = content;
+            alert(this.responseText);
+        }
+    };
+    xmlhttp.open("GET", "/things", true);
+    xmlhttp.send();
+    </script>
+</div>
+</body>
+</html>
